@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./Header";
 import MoviesPage from "./MoviesPage/MoviesPage";
 import MovieDatePage from "./MovieDatePage/MovieDatePage";
+import SeatsPage from "./SeatsPage/SeatsPage";
 
 export default function App() {
 
@@ -15,6 +16,7 @@ export default function App() {
             <Routes>
                 <Route path='/' element={<MoviesPage/>}/>
                 <Route path='/filme/:idMovie' element={<MovieDatePage/>}/>
+                <Route path='/sessao/:idShowSeats' element={<SeatsPage/>} />
             </Routes>
 
         </BrowserRouter>

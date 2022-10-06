@@ -11,7 +11,7 @@ export default function MoviesPage(){
 
     useEffect(()=>{
         
-        const promese = axios.get('https://mock-api.driven.com.br/api/v8/cineflex/movies')
+        const promese = axios.get('https://mock-api.driven.com.br/api/v5/cineflex/movies')
         promese.then((res)=>{
             setMovies(res.data)
             console.log(res.data)
@@ -20,6 +20,10 @@ export default function MoviesPage(){
             console.log(err.response)
         })
     },[])
+
+    if(movies.length===0){
+        return 'carregando...'
+    }
         
     return(
 

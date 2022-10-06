@@ -15,7 +15,7 @@ export default function MovieDatePage() {
 
     useEffect(()=>{
         
-        const promese = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${idMovie}/showtimes`)
+        const promese = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/${idMovie}/showtimes`)
 
         promese.then((res)=>{
             

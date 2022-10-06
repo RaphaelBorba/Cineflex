@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 
@@ -9,8 +10,9 @@ export default function Sections({ object }) {
         <SectionsDiv>
             <h2> {object.weekday + ' - ' + object.date}  </h2>
             <div>
-                {object.showtimes.map((a, i) => <button key={i}>{a.name}</button>)}
+                {object.showtimes.map((a, i) => <Link key={i} to={`/sessao/${a.id}`}><button >{a.name}</button></Link>)}
             </div>
+            
         </SectionsDiv>
     );
 }

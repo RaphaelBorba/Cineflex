@@ -2,20 +2,27 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import FooterSeatsPage from "./FooterSeatsPage";
 import SeatsButtons from "./SeatsButtons";
+import SeatsForm from "./SeatsForm";
 
 
 
 export default function SeatsPage() {
 
     const [seatsArr, setSeatsArr] = useState([])
+    const [chosenSeats, setChosenSeats] = useState([])
+    const [chosenSeatsId, setChosenSeatsId] = useState([])
+    
 
     const { idShowSeats } = useParams()
+
+    /* GET PROMESE */
+
 
     useEffect(() => {
 
         const promese = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idShowSeats}/seats`)
-        console.log('asdasd')
         promese.then((res) => {
             console.log(res)
             setSeatsArr(res.data)
@@ -26,6 +33,8 @@ export default function SeatsPage() {
         })
     }, [idShowSeats])
 
+    /* SHOWS A MENSSAGE WHILE THE PROMESE DON'T LOAD */
+
     if (seatsArr.length === 0) {
         return 'carregando...'
     }
@@ -35,14 +44,24 @@ export default function SeatsPage() {
         <SeatsPageDiv>
             <h1>Selecione o(s) assento(s)</h1>
             <Board>
-                {seatsArr.seats.map((a) => <SeatsButtons key={a.id} numberSeat={a.name} isAvailable={a.isAvailable} />)}
+                {seatsArr.seats.map((a) => <SeatsButtons key={a.id}
+                    numberSeat={a.name}
+                    id={a.id}
+                    isAvailable={a.isAvailable}
+                    chosenSeats={chosenSeats}
+                    setChosenSeats={setChosenSeats}
+                    chosenSeatsId={chosenSeatsId}
+                    setChosenSeatsId={setChosenSeatsId}
+                />)}
             </Board>
             <Infos>
                 <Exemple border='#0E7D71' color='#1AAE9E'><nav></nav><span>Selecionado</span></Exemple>
                 <Exemple border='#7B8B99' color='#C3CFD9'><nav></nav><span>Disponível</span></Exemple>
                 <Exemple border='#F7C52B' color='#FBE192'><nav></nav><span>Indisponível</span></Exemple>
             </Infos>
-
+            <SeatsForm
+                chosenSeatsId={chosenSeatsId}/>
+            <FooterSeatsPage date={seatsArr.day.weekday} hour={seatsArr.name} url={seatsArr.movie.posterURL} title={seatsArr.movie.title} />
         </SeatsPageDiv>
     );
 }

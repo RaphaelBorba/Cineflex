@@ -11,7 +11,8 @@ export default function MovieDatePage() {
 
     const [chosenMovie, setChosenMovie] = useState([])
     const {idMovie} = useParams()
-    
+
+    /* AXIOS PROMESE */
 
     useEffect(()=>{
         
@@ -25,8 +26,6 @@ export default function MovieDatePage() {
             alert('Erro: ' +err.response.status)
         })
     },[])
-
-    console.log(chosenMovie)
 
     return (
 

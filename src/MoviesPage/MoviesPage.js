@@ -9,15 +9,17 @@ export default function MoviesPage(){
 
     const [movies, setMovies] = useState([])
 
+    /* AXIOS PROMESE */
+
     useEffect(()=>{
         
         const promese = axios.get('https://mock-api.driven.com.br/api/v5/cineflex/movies')
         promese.then((res)=>{
             setMovies(res.data)
-            console.log(res.data)
+            
         })
         promese.catch((err)=>{
-            console.log(err.response)
+            alert(err.response.data)
         })
     },[])
 

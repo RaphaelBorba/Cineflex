@@ -17,19 +17,18 @@ export default function SeatsPage() {
 
     const { idShowSeats } = useParams()
 
-    /* GET PROMESE */
+    /* AXIOS PROMESE */
 
 
     useEffect(() => {
 
         const promese = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idShowSeats}/seats`)
         promese.then((res) => {
-            console.log(res)
             setSeatsArr(res.data)
         })
 
         promese.catch((err) => {
-            console.log(err.response)
+            alert(err.response.data)
         })
     }, [idShowSeats])
 
@@ -60,7 +59,10 @@ export default function SeatsPage() {
                 <Exemple border='#F7C52B' color='#FBE192'><nav></nav><span>Indisponível</span></Exemple>
             </Infos>
             <SeatsForm
-                chosenSeatsId={chosenSeatsId}/>
+                chosenSeatsId={chosenSeatsId}
+                seatsArr={seatsArr}
+                chosenSeats={chosenSeats}/>
+                
             <FooterSeatsPage date={seatsArr.day.weekday} hour={seatsArr.name} url={seatsArr.movie.posterURL} title={seatsArr.movie.title} />
         </SeatsPageDiv>
     );

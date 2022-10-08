@@ -1,13 +1,16 @@
 import axios from "axios";
 import { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 
-export default function SeatsForm({chosenSeatsId}) {
+
+export default function SeatsForm({chosenSeatsId , seatsArr, chosenSeats}) {
 
     const [form, setForm] = useState({ name: '', cpf: ''})
+    const navigate = useNavigate()
 
-    /* CREATE AND POST THE PROMESE */
+    /* CREATE AND POST A PROMESE, AFTER SUCCESS NAVIGATE TO /sucesso */
 
     function reserveSeats(e){
 
@@ -15,15 +18,18 @@ export default function SeatsForm({chosenSeatsId}) {
 
         let obj = {...form, ids:chosenSeatsId}
         setForm(obj)
-        console.log(obj)
 
         let url = 'https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many'
         
         const promese = axios.post(url,obj)
+
         
-        promese.then((e)=>console.log(e))
         
-        promese.catch((e)=>console.log(e.response))
+        promese.then((e)=>{
+            navigate('/sucesso', { state: {infosMovie:seatsArr, resultForm:obj , chosenSeats} })
+        })
+
+        promese.catch((e)=>alert(e.response.dat))
         
     }
 

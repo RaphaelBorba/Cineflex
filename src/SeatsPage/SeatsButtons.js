@@ -6,23 +6,20 @@ export default function SeatsButtons({ numberSeat, isAvailable, setChosenSeats, 
 
     /* FUNCTION TO ADD THE SEAT IN chosenSeats */
     
-
     function attChosenSeats(id,seat) {
         if (chosenSeats.includes(seat)) {
             let arrId= chosenSeatsId.filter((a) => id !== a) 
             let arr = chosenSeats.filter((a) => seat !== a)
             setChosenSeats(arr)
             setChosenSeatsId(arrId)
-            console.log(arr, arrId)
 
         } else {
-            let arrId=[... chosenSeatsId]
+            let arrId=[...chosenSeatsId]
             let arr = [...chosenSeats]
             arrId.push(id)
             arr.push(seat)
             setChosenSeats(arr)
             setChosenSeatsId(arrId)
-            console.log(arr, arrId)
         }
 
     }

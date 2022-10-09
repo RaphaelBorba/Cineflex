@@ -1,4 +1,4 @@
-/* import { useLocation, useNavigate } from "react-router-dom"; */
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 
@@ -6,13 +6,13 @@ import styled from "styled-components";
 
 export default function Header() {
 
-    /* const navigate = useNavigate() */
-    /* console.log(useLocation()) */
+    const navigate = useNavigate()
+    
 
     return (
 
-        <Top /* onClick={()=>navigate(-1)} */>
-            {/* <ion-icon name="arrow-back-outline"></ion-icon> */}
+        <Top>
+            {(useLocation().pathname=== '/')?null:<ion-icon onClick={()=>navigate(-1)} name="arrow-back-outline"></ion-icon>}
             <h1>CINEFLEX</h1>
         </Top>
     );
@@ -30,6 +30,13 @@ const Top = styled.div`
     h1{
         color: #E8833A;
         font-size: 34px;
+    }
+    ion-icon{
+        color: #E8833A;
+        position: absolute;
+        font-size: 30px;
+        top: 19px;
+        left: 30px;
     }
 
 
